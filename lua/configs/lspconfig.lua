@@ -96,6 +96,19 @@ lspconfig.bashls.setup({
     capabilities = capabilities,
 })
 
+lspconfig.html.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+})
+
+lspconfig.cssls.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+    filetypes = { "css", "scss", "sass", "pcss" },
+})
+
 lspconfig.lua_ls.setup({
     on_attach = on_attach,
     on_init = on_init,

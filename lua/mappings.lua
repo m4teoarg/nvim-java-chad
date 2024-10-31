@@ -28,12 +28,4 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
--- vim.api.nvim_create_user_command("Supermaven", function()
---   vim.cmd "luafile ~/.local/share/nvim/lazy/supermaven-nvim/lua/supermaven-nvim/binary/binary_fetcher.lua"
--- end, {})
-
--- require("configs.prompt").setup()
--- vim.api.nvim_create_user_command("PromptCommand", function()
---   require("configs.prompt").prompt:run()
--- end, {})
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

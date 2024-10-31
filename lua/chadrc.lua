@@ -7,10 +7,15 @@ local M = {}
 
 M.base46 = {
   theme = "onedark",
+  integrations = { "dap" },
 
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
+    DapBreakpoint = { fg = { "pink", 2 } },
+    DapStopped = { fg = { "red", 2 } },
+    DapBreakpointRejected = { fg = { "red", 2 } },
+    DapLogPoint = { fg = { "red", 2 } },
   },
 }
 
@@ -21,26 +26,21 @@ M.ui = {
 }
 
 M.nvdash = {
-  load_on_startup = false,
+  load_on_startup = true,
 }
 
 M.lsp = {
-  diagnostics = {
-    virtual_text = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
-  },
+  signature = true,
 }
 
--- M.mason = {
---   pkgs = {
---     "typescript-language-server",
---     "lua-language-server",
---     "eslint-lsp",
---     "prettierd",
---     "pyright",
---   },
--- }
+M.colorify = {
+  enabled = true,
+  mode = "virtual",
+  virt_text = "󱓻 ",
+  highlight = {
+    hex = true,
+    lspvars = true,
+  },
+}
 
 return M

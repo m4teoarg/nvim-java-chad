@@ -19,6 +19,8 @@ return {
                 "vim",
                 "lua",
                 "vimdoc",
+                "markdown",
+                "markdown_inline",
                 "html",
                 "css",
                 "python",
@@ -111,17 +113,14 @@ return {
 
     {
         "mfussenegger/nvim-jdtls",
-      ft = "java",
-  dependencies = {
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
-  },
-  config = function()
-    require("configs.dap-java")
-  end,
-        -- config = function()
-        --     require("configs.java") -- Asegúrate de usar la ruta correcta
-        -- end,
+        ft = "java",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "rcarriga/nvim-dap-ui",
+        },
+        config = function()
+            require("configs.dap-java")
+        end,
     },
 
     { "rcarriga/nvim-notify" },
@@ -140,11 +139,43 @@ return {
             dsable_inline_completion = false,
         },
     },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        lazy = "VeryLazy",
+        opts = {},
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "echasnovski/mini.icons",
+        },
+    },
+    {
+        "iamcco/markdown-preview.nvim",
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        -- build = "cd app && yarn install",
+        init = function()
+            vim.g.mkdp_filetypes = { "markdown" }
+        end,
+        ft = { "markdown" },
+    },
 
     {
         "grapp-dev/nui-components.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",
         },
+    },
+    {
+        "nvimtools/none-ls.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.prettier.with({
+                        filetypes = { "html", "css", "cssls", "javascript", "typescript" },
+                    }),
+                },
+            })
+        end,
     },
 }
