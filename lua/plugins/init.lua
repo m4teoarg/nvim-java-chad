@@ -178,4 +178,38 @@ return {
             })
         end,
     },
+    {
+        "dense-analysis/ale",
+        event = "BufRead",
+        -- lazy = "VeryLazy",
+        config = function()
+            -- Habilitar linter para HTML
+            vim.g.ale_linters = {
+                html = { "htmlhint" },
+            }
+            -- Configuraciones adicionales
+            vim.g.ale_lint_on_text_changed = "always"
+            vim.g.ale_lint_on_insert_leave = 1
+        end,
+    },
+    --#region
+    -- none-ls.nvim
+    {
+        "nvimtools/none-ls.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        event = "BufReadPre",
+        config = function()
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                sources = {
+                    -- null_ls.builtins.diagnostics.stylua,
+                    -- null_ls.builtins.diagnostics.htmlhint,
+                    null_ls.builtins.formatting.prettier.with({
+                        filetypes = { "html", "css", "javascript", "typescript" },
+                    }),
+                },
+            })
+        end,
+    },
+    --#endregion
 }
