@@ -12,12 +12,10 @@ M.base46 = {
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
-    DapBreakpoint = { fg = { "pink", 2 } },
-    DapStopped = { fg = { "red", 2 } },
-    DapBreakpointRejected = { fg = { "red", 2 } },
-    DapLogPoint = { fg = { "red", 2 } },
   },
 }
+
+vim.cmd("autocmd VimEnter * lua dofile(vim.g.base46_cache .. 'dap')")
 
 M.ui = {
   tabufline = {
