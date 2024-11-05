@@ -30,6 +30,13 @@ return {
         },
     },
 
+    -- {
+    --     "L3MON4D3/LuaSnip",
+    --     config = function()
+    --         require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/" })
+    --     end,
+    -- },
+
     {
         "nvim-tree/nvim-tree.lua",
         opts = {
@@ -56,7 +63,6 @@ return {
             require("configs.mason-lint")
         end,
     },
-
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -123,7 +129,7 @@ return {
         end,
     },
 
-    { "rcarriga/nvim-notify" },
+    -- { "rcarriga/nvim-notify" },
 
     {
         "supermaven-inc/supermaven-nvim",
@@ -212,4 +218,19 @@ return {
         end,
     },
     --#endregion
+    { "echasnovski/mini.nvim", version = "*" },
+    {
+        "kristijanhusak/vim-dadbod-ui",
+        dependencies = {
+            "tpope/vim-dadbod",
+            "kristijanhusak/vim-dadbod-completion",
+        },
+        event = "VimEnter",
+        config = function()
+            -- Configurar vim-dadbod-ui
+            vim.g.db_ui_use_nerd_fonts = 1
+            -- Definir conexión a MariaDB
+            vim.g.dbs = { { name = "c_mariadb", url = "mysql://mateo:mateo123@localhost/users" } }
+        end,
+    },
 }
