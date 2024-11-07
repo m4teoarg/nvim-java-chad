@@ -196,26 +196,45 @@ return {
         event = "BufReadPre",
         config = function()
             local null_ls = require("null-ls")
+            local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
+            local sources = {
+                null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.prettier,
+                null_ls.builtins.formatting.black,
+                null_ls.builtins.formatting.google_java_format,
+                null_ls.builtins.diagnostics.checkstyle.with({
+                    extra_args = { "-c", vim.fn.expand("$HOME/.config/checkstyle/google_checks.xml") },
+                    filetypes = { "java" },
+                }),
+                null_ls.builtins.formatting.prettier.with({
+                    filetypes = { "html", "css", "javascript", "typescript" },
+                }),
+            }
+
             null_ls.setup({
                 debug = true,
-                timeout = 5000,
-                sources = {
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.formatting.prettier,
-                    null_ls.builtins.formatting.black,
-                    null_ls.builtins.formatting.google_java_format,
-                    null_ls.builtins.diagnostics.checkstyle.with({
-                        extra_args = { "-c", "/home/m4teo/.config/checkstyle/google_checks.xml" },
-                        filetypes = { "java" },
-                    }),
-                    null_ls.builtins.formatting.prettier.with({
-                        filetypes = { "html", "css", "javascript", "typescript" },
-                    }),
-                },
+                timeout = 8000, -- Configurar timeout en milisegundos (5 segundos)
+                sources = sources,
+                on_attach = function(client, bufnr)
+                    if client.supports_method("textDocument/formatting") then
+                        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            group = augroup,
+                            buffer = bufnr,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = bufnr })
+                            end,
+                        })
+                    end
+                end,
             })
+
+            -- Mapear tecla para formatear el archivo manualmente
             vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
         end,
     },
+
     --#endregion
     { "echasnovski/mini.nvim", version = "*" },
     {
