@@ -170,20 +170,7 @@ return {
             "MunifTanjim/nui.nvim",
         },
     },
-    {
-        "nvimtools/none-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local null_ls = require("null-ls")
-            null_ls.setup({
-                sources = {
-                    null_ls.builtins.formatting.prettier.with({
-                        filetypes = { "html", "css", "cssls", "javascript", "typescript" },
-                    }),
-                },
-            })
-        end,
-    },
+
     {
         "dense-analysis/ale",
         event = "BufRead",
@@ -202,19 +189,31 @@ return {
     -- none-ls.nvim
     {
         "nvimtools/none-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvimtools/none-ls-extras.nvim",
+        },
         event = "BufReadPre",
         config = function()
             local null_ls = require("null-ls")
             null_ls.setup({
+                debug = true,
+                timeout = 5000,
                 sources = {
-                    -- null_ls.builtins.diagnostics.stylua,
-                    -- null_ls.builtins.diagnostics.htmlhint,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.formatting.prettier,
+                    null_ls.builtins.formatting.black,
+                    null_ls.builtins.formatting.google_java_format,
+                    null_ls.builtins.diagnostics.checkstyle.with({
+                        extra_args = { "-c", "/home/m4teo/.config/checkstyle/google_checks.xml" },
+                        filetypes = { "java" },
+                    }),
                     null_ls.builtins.formatting.prettier.with({
                         filetypes = { "html", "css", "javascript", "typescript" },
                     }),
                 },
             })
+            vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, {})
         end,
     },
     --#endregion
