@@ -6,39 +6,43 @@
 local M = {}
 
 M.base46 = {
-  theme = "onedark",
-  integrations = { "dap" },
+    theme = "catppuccin",
+    integrations = { "dap" },
 
-  hl_override = {
-    Comment = { italic = true },
-    ["@comment"] = { italic = true },
-  },
+    hl_override = {
+        Comment = { italic = true },
+        ["@comment"] = { italic = true },
+    },
 }
 
-vim.cmd("autocmd VimEnter * lua dofile(vim.g.base46_cache .. 'dap')")
+-- vim.cmd("autocmd VimEnter * lua dofile(vim.g.base46_cache .. 'dap')")
 
 M.ui = {
-  tabufline = {
-    lazyload = false,
-  },
+    tabufline = {
+        lazyload = false,
+    },
+    statusline = {
+        theme = "default",
+        separator_style = "block",
+    },
 }
 
 M.nvdash = {
-  load_on_startup = true,
+    load_on_startup = true,
 }
 
 M.lsp = {
-  signature = true,
+    signature = true,
 }
 
 M.colorify = {
-  enabled = true,
-  mode = "virtual",
-  virt_text = "󱓻 ",
-  highlight = {
-    hex = true,
-    lspvars = true,
-  },
+    enabled = true,
+    mode = "virtual",
+    virt_text = "󱓻 ",
+    highlight = {
+        hex = true,
+        lspvars = true,
+    },
 }
 
 return M

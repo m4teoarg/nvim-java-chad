@@ -11,6 +11,23 @@ return {
             require("configs.lspconfig")
         end,
     },
+    {
+        "christoomey/vim-tmux-navigator",
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+        keys = {
+            { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+            { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+            { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+            { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+        },
+    },
 
     {
         "nvim-treesitter/nvim-treesitter",
@@ -96,6 +113,7 @@ return {
 
     {
         "rcarriga/nvim-dap-ui",
+        dofile(vim.g.base46_cache .. "dap"),
         dependencies = {
             "mfussenegger/nvim-dap",
             "nvim-neotest/nvim-nio",
