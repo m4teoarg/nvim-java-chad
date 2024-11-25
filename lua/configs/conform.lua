@@ -5,7 +5,9 @@ local options = {
         html = { "prettier" },
         ts = { "prettier" },
         typescript = { "prettier" },
+        javascript = { "prettier" },
         python = { "black" },
+        golang = { "goline" },
         -- java = { "prettier" },
         java = {
             "google-java-format",

@@ -46,8 +46,8 @@ local lspconfig = require("lspconfig")
 -- list of all servers configured.
 lspconfig.servers = {
     "lua_ls",
-    -- "clangd",
-    -- "gopls",
+    "clangd",
+    "gopls",
     "jdtls",
     "pyright",
     "bashls",
@@ -109,6 +109,19 @@ lspconfig.cssls.setup({
     filetypes = { "css", "scss", "sass", "pcss" },
 })
 
+lspconfig.ts_ls.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+})
+
+lspconfig.gopls.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+})
+
 lspconfig.lua_ls.setup({
     on_attach = on_attach,
     on_init = on_init,
@@ -119,6 +132,8 @@ lspconfig.lua_ls.setup({
             diagnostics = {
                 enable = false, -- Disable all diagnostics from lua_ls
                 -- globals = { "vim" },
+                -- disable = { "unused-local" },
+                -- "missing-fields",
             },
             workspace = {
                 library = {

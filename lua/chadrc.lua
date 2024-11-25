@@ -7,6 +7,17 @@ local M = {}
 
 M.base46 = {
     theme = "catppuccin",
+    -- changed_themes = {
+    --     catppuccin = {
+    --         base16 = { base00 = "#1e1e2e" },
+    --         base_30 = {
+    --             red = "#F38BA8",
+    --             black2 = "#1e1e2e",
+    --         },
+    --     },
+    --     onedark = { ... },
+    -- },
+
     integrations = { "dap" },
 
     hl_override = {
@@ -23,16 +34,36 @@ M.ui = {
     },
     statusline = {
         theme = "default",
-        separator_style = "block",
+        separator_style = "default",
+        -- order = { "mode", "f", "git", "%=", "lsp_msg", "%=", "lsp", "cwd" },
     },
 }
 
 M.nvdash = {
-    load_on_startup = true,
+    load_on_startup = false,
+    header = {
+        "                            ",
+        "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+        "   ▄▀███▄     ▄██ █████▀    ",
+        "   ██▄▀███▄   ███           ",
+        "   ███  ▀███▄ ███           ",
+        "   ███    ▀██ ███           ",
+        "   ███      ▀ ███           ",
+        "   ▀██ ███    ███           ",
+        "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+        "                            ",
+        "     Powered By  eovim    ",
+        "                            ",
+    },
+    buttons = {
+        { txt = "  Find File", keys = "Spc f f", cmd = "Telescope find_files" },
+        { txt = "  Recent Files", keys = "Spc f o", cmd = "Telescope oldfiles" },
+        -- more... check nvconfig.lua file for full list of buttons
+    },
 }
 
 M.lsp = {
-    signature = true,
+    signature = false,
 }
 
 M.colorify = {
@@ -43,6 +74,10 @@ M.colorify = {
         hex = true,
         lspvars = true,
     },
+}
+
+M.cmd = {
+    border = false,
 }
 
 return M

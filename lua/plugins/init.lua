@@ -47,23 +47,6 @@ return {
         },
     },
 
-    -- {
-    --     "L3MON4D3/LuaSnip",
-    --     config = function()
-    --         require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/" })
-    --     end,
-    -- },
-
-    {
-        "nvim-tree/nvim-tree.lua",
-        opts = {
-            view = {
-                side = "left",
-                width = 30,
-            },
-        },
-    },
-
     {
         "mfussenegger/nvim-lint",
         event = { "BufReadPre", "BufNewFile" },
@@ -106,7 +89,7 @@ return {
             require("configs.dap")
         end,
     },
-    --
+
     {
         "nvim-neotest/nvim-nio",
     },
@@ -147,8 +130,6 @@ return {
         end,
     },
 
-    -- { "rcarriga/nvim-notify" },
-
     {
         "supermaven-inc/supermaven-nvim",
         event = "LspAttach",
@@ -165,17 +146,18 @@ return {
     },
     {
         "MeanderingProgrammer/render-markdown.nvim",
-        lazy = "VeryLazy",
-        opts = {},
+        lazy = false,
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "echasnovski/mini.icons",
         },
+        config = function()
+            require("render-markdown").setup({})
+        end,
     },
     {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        -- build = "cd app && yarn install",
         init = function()
             vim.g.mkdp_filetypes = { "markdown" }
         end,
@@ -203,7 +185,6 @@ return {
             vim.g.ale_lint_on_insert_leave = 1
         end,
     },
-    --#region
     -- none-ls.nvim
     {
         "nvimtools/none-ls.nvim",
@@ -221,6 +202,7 @@ return {
                 null_ls.builtins.formatting.prettier,
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.formatting.google_java_format,
+                null_ls.builtins.formatting.golines,
                 null_ls.builtins.diagnostics.checkstyle.with({
                     extra_args = { "-c", vim.fn.expand("$HOME/.config/checkstyle/google_checks.xml") },
                     filetypes = { "java" },

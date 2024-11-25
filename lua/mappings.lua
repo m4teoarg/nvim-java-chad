@@ -1,4 +1,4 @@
-require "nvchad.mappings"
+require("nvchad.mappings")
 
 -- add yours here
 
@@ -11,21 +11,28 @@ vim.api.nvim_set_keymap("n", "<leader>tl", ":TimerlyToggle<CR>", { desc = "timer
 
 -- mouse users + nvimtree users!
 vim.keymap.set("n", "<RightMouse>", function()
-  vim.cmd.exec '"normal! \\<RightMouse>"'
+    vim.cmd.exec('"normal! \\<RightMouse>"')
 
-  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
-  require("menu").open(options, { mouse = true })
+    local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+    require("menu").open(options, { mouse = true })
 end, {})
 -- Keyboard users
 vim.keymap.set("n", "<C-t>", function()
-  require("menu").open "default"
+    require("menu").open("default")
 end, {})
 
 vim.api.nvim_set_keymap(
-  "n",
-  "<leader>c",
-  ':lua require("form").render_component()<CR>',
-  { noremap = true, silent = true }
+    "n",
+    "<leader>c",
+    ':lua require("form").render_component()<CR>',
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>dv",
+    ":lua vim.diagnostic.config({virtual_text = false})<CR>",
+    { noremap = true, silent = true }
 )
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
